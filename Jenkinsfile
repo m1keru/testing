@@ -1,6 +1,7 @@
 pipeline {
     agent any
     environment {
+        CREDS=credentials('jnk-m1ke')
         CC = """ 
             ${sh(
                 returnStdout: true,
@@ -19,6 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                echo '${CREDS_USR} ${CREDS_PSW}'
             }
         }
     }
