@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                echo '${CREDS_USR} ${CREDS_PSW}'
+                sh 'echo ${CREDS_USR} ${CREDS_PSW}'
             }
         }
     }
