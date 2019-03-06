@@ -2,6 +2,7 @@ import socketserver
 import os
 import socket
 import logging
+from sys import exit
 
 
 class Cli(object):
@@ -23,7 +24,7 @@ class Cli(object):
 class ForkingTCPRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
         data = str(self.request.recv(1024), 'ascii')
-	logging.	
+        logging.info("{} : {}".format(__file__,  data))
         response = bytes("{}: {}".format(os.getpid(), data), 'ascii')
         self.request.sendall(response)
 
@@ -33,8 +34,11 @@ class ForkingTCPServer(socketserver.ForkingMixIn, socketserver.TCPServer):
 
 
 if __name__ == "__main__":
-
-    logging.basicConfig(filename="/var/log/proxy.log", level=logging.INFO)
+    try:
+        logging.basicConfig(filename="/var/log/proxy.log", level=logging.INFO)
+    except PermissionError:
+        print("Not enouht rights to create log file /var/log/proxy.log")
+        exit(1)
     HOST, PORT = "localhost", 8888
     ForkingTCPServer.server = ForkingTCPServer(
             (HOST, PORT),
