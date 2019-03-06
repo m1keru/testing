@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..12331'
+                echo 'Building...'
+                sh 'ls -lah'
             }
         }
         stage('Deploy') {
