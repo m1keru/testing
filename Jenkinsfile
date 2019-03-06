@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'ls -lah ${CC}'
+                sh 'echo PATH is  ${CC}'
             }
         }
         stage('Deploy') {
