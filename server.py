@@ -16,6 +16,7 @@ class Cli(object):
                 sock.sendall(bytes("bye", "utf-8"))
                 received = str(sock.recv(1024), "utf-8")
                 print("response: {}".format(received))
+                print("some")
             except socket.error as e:
                 print(e)
 
