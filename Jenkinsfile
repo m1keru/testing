@@ -1,14 +1,32 @@
-node {
-    stage('Prep') {
-		node('tyurnote'){
-        	docker.image('mysql:5').withRun('-e "MYSQL_ROOT_PASSWORD=qwertyui"'){ c ->
-				docker.image('mysql:5').inside("--link ${c.id}:db") {
-                	sh 'while ! mysqladmin ping -hdb --silent; do sleep 1; done'
-            	}
-        		docker.image('python:3-alpine').inside{
-            		sh 'python -V'
-	        	}
-			}
-    	}
-	}
+pipeline {
+    agent any
+    environment {
+        CREDS=credentials('jnk-m1ke')
+        CC = """ 
+            ${sh(
+                returnStdout: true,
+                script: 'echo $PATH'
+            )}
+        """    
+        BIN="server.py"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh 'echo PATH is  ${CC}'
+            }
+        }
+        stage('Deploy') {
+            agent {
+		        docker { image 'python:3-alpine' }
+				//label 'tyurnote'
+    		}
+            steps {
+                echo 'Deploying....'
+                sh '/usr/bin/env python3 ${BIN}'
+            }
+        }
+    }
 }
