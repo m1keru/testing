@@ -34,7 +34,7 @@ class ForkingTCPServer(socketserver.ForkingMixIn, socketserver.TCPServer):
 
 if __name__ == "__main__":
 
-    logging.basicConfig(filename="/var/log/proxy.log", level=logging.INFO)
+    logging.basicConfig(filename="proxy.log", level=logging.INFO)
     HOST, PORT = "localhost", 8888
     ForkingTCPServer.server = ForkingTCPServer(
             (HOST, PORT),
