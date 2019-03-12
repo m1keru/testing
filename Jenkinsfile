@@ -21,6 +21,7 @@ pipeline {
         stage('Deploy') {
             agent {
 		        docker { image 'python3' }
+				label 'tyurnote'
     		}
             steps {
                 echo 'Deploying....'
