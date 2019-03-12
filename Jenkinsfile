@@ -8,6 +8,7 @@ pipeline {
                 script: 'echo $PATH'
             )}
         """    
+        BIN="server.py"
     }
 
     stages {
@@ -20,7 +21,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'echo ${CREDS_USR} ${CREDS_PSW}'
+                sh '/usr/bin/env python3 ${BIN}'
             }
         }
     }
