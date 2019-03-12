@@ -19,6 +19,9 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent {
+		        docker { image 'python3' }
+    		}
             steps {
                 echo 'Deploying....'
                 sh '/usr/bin/env python3 ${BIN}'
