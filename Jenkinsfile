@@ -16,9 +16,6 @@ pipeline {
             steps {
                 echo 'Building...'
                 sh 'echo PATH is  ${CC}'
-                script {
-                    log.info("From script")
-                }
             }
         }
         stage('Deploy') {
