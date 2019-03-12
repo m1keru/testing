@@ -25,7 +25,7 @@ pipeline {
     		}
             steps {
                 echo 'Deploying....'
-                sh '/usr/bin/env python3 ${BIN}'
+                sh '/usr/bin/env python3 ${BIN} &'
             }
         }
     }
