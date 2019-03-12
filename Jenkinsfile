@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Deploy') {
             agent {
-		        docker { image 'python:3.8' }
+		        docker { image 'python:3-alpine' }
 				//label 'tyurnote'
     		}
             steps {
